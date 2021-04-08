@@ -59,11 +59,10 @@ export const wheelControllers = (function () {
 
                 const randomGeneratedSector = generateRandomSector(availableSectorsData);
                 availableSectorsData = availableSectorsData.filter(x => x != randomGeneratedSector.sector); 
-                
+
                 const winningSector = getWinningSector(turn, randomGeneratedSector, firstSpecialSector, secondSpecialSector);
 
                 try {
-
                     await spinningWheel(winningSector.degree);
                     render.updateTableSectorsStatisticks(winningSector.sector);
                     section.append(render.specialSector(winningSector));
@@ -107,6 +106,7 @@ export const wheelControllers = (function () {
     }
 
     function spinningWheelAnimation (rotateDegree, wheel) {
+        
         wheel.style.transform = `translate(-50%, -50%) rotate(${rotateDegree}deg)`;
         rotateDegree += 1;
 
@@ -152,13 +152,13 @@ export const wheelControllers = (function () {
 
         const [firstRandomSector, secondRandomSector] = generateRandomNonRepeatingNumbers(2, data);
 
-        const randomIndexFirstNumber = generateRandomNonReapetingTurns(2, []);
-        const randomIndexSecondNumber = generateRandomNonReapetingTurns(3, randomIndexFirstNumber);
+        const randomTurnsFirstNumber = generateRandomNonReapetingTurns(2, []);
+        const randomTurnsSecondNumber = generateRandomNonReapetingTurns(3, randomTurnsFirstNumber);
         
         const firstSpecialSector = { 
             sector: firstRandomSector, 
             degree: calculateWinningSectorDegree(firstRandomSector, sectorsCount), 
-            turns: randomIndexFirstNumber ,
+            turns: randomTurnsFirstNumber ,
             index: 1,
             name: "First Special Sector",
         };
@@ -166,7 +166,7 @@ export const wheelControllers = (function () {
         const secondSpecialSector = { 
             sector: secondRandomSector, 
             degree: calculateWinningSectorDegree(secondRandomSector, sectorsCount), 
-            turns: randomIndexSecondNumber ,
+            turns: randomTurnsSecondNumber ,
             index: 2,
             name: "Second Special Sector",
         };
