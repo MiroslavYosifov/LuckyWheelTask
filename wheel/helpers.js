@@ -33,8 +33,8 @@ export function getRandomArbitrary(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
-export function generateWinningSectorDegree(winningSector, countOfSectors) {
-    let degree = (360 - (Math.round(winningSector * (360 / 16) - (360 / 16))));
+export function calculateWinningSectorDegree(winningSector, sectorsCount) {
+    let degree = (360 - (Math.round(winningSector * (360 / sectorsCount) - (360 / sectorsCount))));
     if(degree === 360) degree = 0;
 
     return degree;
