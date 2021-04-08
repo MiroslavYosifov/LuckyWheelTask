@@ -20,7 +20,7 @@ body {
 }
 
 p {
-	font-size: 2rem;
+	font-size: 1.8rem;
 	font-family: sans-serif;
 }
 
@@ -163,7 +163,7 @@ main {
 	background-color: var(--background-color);
 }
 
-.wheel__slice {
+.wheel__sector {
 	display: flex;
 	align-items: flex-start;
 	justify-content: center;
@@ -175,15 +175,15 @@ main {
     transform-origin: bottom;
 }
 
-.wheel__slice:nth-child(odd) {
+.wheel__sector:nth-child(odd) {
     background-color: rgb(46, 157, 193);
 }
 
-.wheel__slice:nth-child(even) {
+.wheel__sector:nth-child(even) {
     background-color: rgb(199, 139, 19);
 }
 
-.wheel__slice--points {
+.wheel__sector--points {
 	display: flex;
 	align-items: center;
 	margin-top: 2rem;

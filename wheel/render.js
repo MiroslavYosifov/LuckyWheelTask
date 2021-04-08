@@ -10,20 +10,20 @@ export const render = (function () {
         const sectorsCount = data.length;
 
         const wheelPerimeterInPixels = Math.ceil(Number(wheel.offsetWidth) * 3.142);
-        const sliceWidthInPixels = Math.ceil(wheelPerimeterInPixels / sectorsCount);
-        const sliceWidthInPercents = Math.ceil((sliceWidthInPixels / Number(wheel.offsetWidth)) * 100);
+        const sectorWidthInPixels = Math.ceil(wheelPerimeterInPixels / sectorsCount);
+        const sectorWidthInPercents = Math.ceil((sectorWidthInPixels / Number(wheel.offsetWidth)) * 100);
         const rotateDeg = 360 / sectorsCount;
     
         for (let index = 0; index < sectorsCount; index++) {
 
             let div = document.createElement('div');
-            div.classList.add(`wheel__slice`, `wheel__slice--${index + 1}`)
-            div.style.width = `${sliceWidthInPercents}%`;
+            div.classList.add(`wheel__sector`, `wheel__sector--${index + 1}`)
+            div.style.width = `${sectorWidthInPercents}%`;
             div.style.transform = `translateX(-50%) rotate(${rotateDeg * index}deg)`;
 
             let span = document.createElement('span');
             span.textContent = `${index + 1}`;
-            span.classList.add(`wheel__slice--points`);
+            span.classList.add(`wheel__sector--points`);
 
             div.append(span);
             wheel.append(div);
@@ -66,7 +66,7 @@ export const render = (function () {
         p.style.fontSize = "16px";
         p.style.padding = "0.2rem 1rem";
         p.style.background = "rgb(100, 100, 100)";
-        
+
         statistics.append(p);
     }
 
