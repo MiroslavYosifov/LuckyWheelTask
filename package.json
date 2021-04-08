@@ -1,0 +1,13 @@
+{
+  "name": "wheeltask",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "npx parcel index.html",
+    "build": "parcel build index.html --out-dir ./dist"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {}
+}

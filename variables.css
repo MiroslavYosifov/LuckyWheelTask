@@ -1,0 +1,6 @@
+:root {
+    --background-color: rgb(182, 182, 182);
+    
+    --wheel-section-width: 100%;
+    --wheel-diameter: 70rem;
+}
