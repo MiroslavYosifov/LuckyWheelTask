@@ -29,8 +29,11 @@ h1 {
 	font-family: sans-serif;
 	font-size: 2.8rem;
 	margin: 1rem;
-	color: rgb(192, 192, 192);
+	color: var(--text-secondary-color);
 }
+
+
+/* MOBILE */ /* MOBILE */ /* MOBILE */
 
 @media ( max-width: 580px ) {
 	main {
@@ -50,27 +53,29 @@ h1 {
 	}
 
 	.wheel__spin__button {
-		width: 90px;
-		height: 90px;
+		width: 9rem;
+		height: 9rem;
 	}
 }
+
+
+/* DESKTOP */ /* DESKTOP */ /* DESKTOP */
 
 @media ( min-width: 581px ) {
 	.statistics__wrapper {
 		width: 35%;
-		
 	}
 
 	.wheel__container {
 		width: 65%;
-		/* padding: 3rem; */
 	}
 
 	.wheel__spin__button {
-		width: 110px;
-		height: 110px;
+		width: 11rem;
+		height: 11rem;
 	}
 }
+
 
 main {
 	display: flex;
@@ -80,12 +85,12 @@ main {
 }
 
 .statistics__wrapper {
-	background: rgb(88, 88, 88);
+	background: var(--base-background-dark-color);
 }
 
 .statistics__section__sectors {
-	background: gray;
-	border-top: 1px solid rgb(165, 165, 165);
+	background: var(--base-background-medium-color);;
+	border-top: 1px solid var(--base-border-medium-color);
 }
 
 .statistics__section__sectors section {
@@ -95,7 +100,7 @@ main {
 .statistics__section__sectors section p {
 	text-align: center;
 	width: 50%;
-	border: 1px solid rgb(165, 165, 165);
+	border: 1px solid var(--base-border-medium-color);
 	border-top: none;
 }
 
@@ -159,7 +164,7 @@ main {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	border-radius: 50%;
-	border: 20px solid white;
+	border: 2rem solid var(--base-background-light-color);;
 	background-color: var(--background-color);
 }
 
@@ -176,11 +181,11 @@ main {
 }
 
 .wheel__sector:nth-child(odd) {
-    background-color: rgb(46, 157, 193);
+    background-color: var(--wheel-secondary-color);
 }
 
 .wheel__sector:nth-child(even) {
-    background-color: rgb(199, 139, 19);
+    background-color: var(--wheel-base-color);
 }
 
 .wheel__sector--points {
@@ -188,7 +193,7 @@ main {
 	align-items: center;
 	margin-top: 2rem;
 	justify-content: center;
-	background: white;
+	background: var(--base-background-light-color);;
 	border-radius: 50%;
 	width: 3rem;
 	height: 3rem;
@@ -197,10 +202,10 @@ main {
 
 .arrow {
     position: absolute;
-    width: 70px;
-    height: 70px;
+    width: 7rem;
+    height: 7rem;
     clip-path: polygon(50% 100%, 0 50%, 100% 50%);
-    background-color: rgb(56, 191, 236);
+    background-color: var(--wheel-arrow-color);
     top: 0;
     left: 50%;
     transform: translate(-50%, -60%);
@@ -213,7 +218,7 @@ button {
 
 .wheel__special__button {
 	background: tomato;
-	color: white;
+	color: var(--text-third-color);
 	font-weight: bold;
 	font-size: 1.6rem;
 	padding: 2rem;
@@ -223,17 +228,17 @@ button {
 
 .wheel__spin__button {
 	position: absolute;
-	z-index:10;
-	top:50%;
-	left:50%;
+	z-index: 10;
+	top: 50%;
+	left: 50%;
 	transform:translate(-50%,-50%);
-	background-color: #ffffff;
-	font-size: 26px;
-	color:#000000;
+	background-color: var(--base-background-light-color);
+	font-size: 2.6rem;
+	color: var(--base-border-dark-color);
 	font-weight: bold;
     border: none;
 	font-family: sans-serif;
-	border-radius:50%;
+	border-radius: 50%;
 	cursor: pointer;
-	outline:none;
+	outline: none;
 }

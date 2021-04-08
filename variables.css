@@ -1,6 +1,21 @@
 :root {
     --background-color: rgb(182, 182, 182);
-    
+
+    --text-base-color: rgb(0, 0, 0);
+    --text-secondary-color: rgb(192, 192, 192);
+    --text-third-color: rgb(255, 255, 255);
+
+    --base-background-light-color: rgb(255, 255, 255);
+    --base-background-medium-color: rgb(107, 106, 106);
+    --base-background-dark-color: rgb(88, 88, 88);
+
+    --base-border-light-color: rgb(255, 255, 255);
+    --base-border-medium-color: rgb(133, 133, 133);
+    --base-border-dark-color: rgb(0, 0, 0);
+
     --wheel-section-width: 100%;
     --wheel-diameter: 70rem;
+    --wheel-base-color: rgb(199, 139, 19);
+    --wheel-secondary-color: rgb(46, 157, 193);
+    --wheel-arrow-color: rgb(56, 191, 236);
 }

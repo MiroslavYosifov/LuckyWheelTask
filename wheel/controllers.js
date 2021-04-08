@@ -59,12 +59,12 @@ export const wheelControllers = (function () {
 
                 const randomGeneratedSector = generateRandomSector(availableSectorsData);
                 availableSectorsData = availableSectorsData.filter(x => x != randomGeneratedSector.sector); 
-
+                
                 const winningSector = getWinningSector(turn, randomGeneratedSector, firstSpecialSector, secondSpecialSector);
 
                 try {
-                    await spinningWheel(winningSector.degree);
 
+                    await spinningWheel(winningSector.degree);
                     render.updateTableSectorsStatisticks(winningSector.sector);
                     section.append(render.specialSector(winningSector));
 
@@ -77,8 +77,6 @@ export const wheelControllers = (function () {
             })(); 
         })
     }
-
-    // MAIN SPINNING
 
     async function spinningWheel(winningSectorDegree) {
 
@@ -109,7 +107,6 @@ export const wheelControllers = (function () {
     }
 
     function spinningWheelAnimation (rotateDegree, wheel) {
-
         wheel.style.transform = `translate(-50%, -50%) rotate(${rotateDegree}deg)`;
         rotateDegree += 1;
 
