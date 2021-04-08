@@ -88,6 +88,11 @@ main {
 	background: var(--base-background-dark-color);
 }
 
+.statistics__section__result {
+	overflow-y: scroll;
+	max-height: 48rem;
+}
+
 .statistics__section__sectors {
 	background: var(--base-background-medium-color);;
 	border-top: 1px solid var(--base-border-medium-color);
