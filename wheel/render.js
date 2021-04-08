@@ -44,8 +44,8 @@ export const render = (function () {
             pCount.textContent = 0;
 
             if(index === 0) {
-                pSector.textContent = "SECTORS";
-                pCount.textContent = "COUNT";
+                pSector.textContent = "Сектори";
+                pCount.textContent = "Брой попадения";
             }
             
             section.append(pSector);
@@ -60,17 +60,19 @@ export const render = (function () {
     }
 
     function addWheelStatisticks (sector) {
+
         const p = document.createElement('p');
         p.textContent = sector
+        p.style.fontSize = "16px";
         p.style.padding = "0.2rem 1rem";
         p.style.background = "rgb(100, 100, 100)";
+        
         statistics.append(p);
     }
 
     function specialSectorsListContainer(spinningCount) {
 
         const section = document.createElement('section');
-
         section.style.display = "flex";
         section.style.alignItems = "center";
         section.style.padding = "0.6rem 0";
@@ -79,6 +81,7 @@ export const render = (function () {
         p.style.fontSize = "16px";
         p.textContent = `${spinningCount}:`;
         resultSectorsStyles(p);
+
         section.append(p)
         statistics.append(section);
 

@@ -18,15 +18,15 @@ export const wheelControllers = (function () {
 
         return new Promise(async (response, reject) => {
 
+            const winningSector = getRandomArbitrary(1, sectorsCount);
+            let winningSectorDegree = generateWinningSectorDegree(winningSector, sectorsCount);
+
             isTimeOver = false;
             isFinalSpinning = false;
 
-            const winningSector = getRandomArbitrary(1, sectorsCount);
-            let finishDegree = generateWinningSectorDegree(winningSector, sectorsCount);
-
             let spinning = setInterval(function() {
 
-                if(isTimeOver && isFinalSpinning && finishDegree === rotateDegree) {
+                if(isTimeOver && isFinalSpinning && winningSectorDegree === rotateDegree) {
                     spinningCount++;
                     render.updateTableSectorsStatisticks(winningSector)
                     render.addWheelStatisticks(`${spinningCount}: ${winningSector}`);
@@ -56,37 +56,34 @@ export const wheelControllers = (function () {
             spinningCount++;
 
             const section = render.specialSectorsListContainer(spinningCount);
-
             const specialSectors = generateSpecialSectors();
             const { firstSpecialSector, secondSpecialSector } = { ...specialSectors };
-            const nonReservedSectorsData = data.filter(x => x != firstSpecialSector.sector && x != secondSpecialSector.sector);
+
+            let availableSectorsData = data.filter(x => x != firstSpecialSector.sector && x != secondSpecialSector.sector);
 
             (async function spinning() {
 
                 if(turn > turnsCount) {
                     response(true);
                     return;
-                } 
+                }
 
-                const [nonSpecialSector] = generateRandomNonRepeatingNumbers(1, nonReservedSectorsData);
-                const nonSpecialSectorDegree = { 
-                    index: 3,
-                    name: "None",
-                    sector: nonSpecialSector, 
-                    degree: generateWinningSectorDegree(nonSpecialSector, sectorsCount) 
-                };
+                const [ randomSector ] = generateRandomNonRepeatingNumbers(1, availableSectorsData);
+                const nonSpecialSectorDegree = generateWinningSectorDegree(randomSector, sectorsCount);
+                const randomGeneratedSector = { sector: randomSector, degree: nonSpecialSectorDegree, index: 3, name: "None"};
+
+                availableSectorsData = availableSectorsData.filter(x => x != randomSector);
+
+                const winningSector = getWinningSector(turn, randomGeneratedSector, firstSpecialSector, secondSpecialSector);
 
                 isTimeOver = false;
                 isFinalSpinning = false;
 
                 let setSpinningInterval = setInterval(function() {
 
-                    if(isTimeOver && isFinalSpinning && getWinningSector(rotateDegree, turn, nonSpecialSectorDegree, firstSpecialSector, secondSpecialSector)) {
-
-                        const winningSector = getWinningSector(rotateDegree, turn, nonSpecialSectorDegree, firstSpecialSector, secondSpecialSector);
+                    if(isTimeOver && isFinalSpinning && rotateDegree === winningSector.degree) {
                         render.updateTableSectorsStatisticks(winningSector.sector);
                         section.append(render.specialSector(winningSector));
-
                         turn++;
                         clearInterval(setSpinningInterval);
                         setTimeout(spinning, 1000);
@@ -103,6 +100,7 @@ export const wheelControllers = (function () {
                 catch (error) {
                     console.log(error);
                 }
+                
             })(); 
         })
     }
@@ -116,11 +114,12 @@ export const wheelControllers = (function () {
         return rotateDegree;
     }
 
-    function getWinningSector(rotateDegree, turn, nonSpecialSectorDegree, firstSpecialSector, secondSpecialSector) {
 
-        const isMatchingFirstSector = rotateDegree === firstSpecialSector.degree && firstSpecialSector.turns.includes(turn);
-        const isMathcingSecondSector = rotateDegree === secondSpecialSector.degree && secondSpecialSector.turns.includes(turn);
-        const isMathcingNonSpecialSector = rotateDegree === nonSpecialSectorDegree.degree && !secondSpecialSector.turns.includes(turn) && !firstSpecialSector.turns.includes(turn);
+    function getWinningSector(turn, randomGeneratedSector, firstSpecialSector, secondSpecialSector) {
+
+        const isMatchingFirstSector = firstSpecialSector.turns.includes(turn);
+        const isMathcingSecondSector = secondSpecialSector.turns.includes(turn);
+        const isMathcingNonSpecialSector = !secondSpecialSector.turns.includes(turn) && !firstSpecialSector.turns.includes(turn);
         
         switch (true) {
             case isMatchingFirstSector:
@@ -128,7 +127,7 @@ export const wheelControllers = (function () {
             case isMathcingSecondSector:
                 return secondSpecialSector;
             case isMathcingNonSpecialSector:
-                return nonSpecialSectorDegree;
+                return randomGeneratedSector;
             default:
                 return false;
         }
@@ -142,19 +141,19 @@ export const wheelControllers = (function () {
         const randomIndexSecondNumber = generateRandomNonReapetingTurns(3, randomIndexFirstNumber);
         
         const firstSpecialSector = { 
-            index: 1,
-            name: "First Special Sector",
             sector: firstRandomSector, 
             degree: generateWinningSectorDegree(firstRandomSector, sectorsCount), 
-            turns: randomIndexFirstNumber 
+            turns: randomIndexFirstNumber ,
+            index: 1,
+            name: "First Special Sector",
         };
 
         const secondSpecialSector = { 
-            index: 2,
-            name: "Second Special Sector",
             sector: secondRandomSector, 
             degree: generateWinningSectorDegree(secondRandomSector, sectorsCount), 
-            turns: randomIndexSecondNumber 
+            turns: randomIndexSecondNumber ,
+            index: 2,
+            name: "Second Special Sector",
         };
 
         return {
