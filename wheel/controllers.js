@@ -9,16 +9,14 @@ export const wheelControllers = (function () {
     let startDegree = 0;
     
     async function startBaseSpinning() {
-        
+
         allSpinningCount++;
+        
+        const section = render.specialSectorsListContainer(allSpinningCount);
+        const winningSector = generateRandomSector(data, sectorsCount);
 
         return new Promise(async (response, reject) => {
-
-            const section = render.specialSectorsListContainer(allSpinningCount);
-            const winningSector = generateRandomSector(data, sectorsCount);
-
             try {
-                
                 startDegree = await spinningWheel(winningSector.degree, startDegree);
                 
                 render.updateTableSectorsStatisticks(winningSector.sector);
@@ -33,18 +31,17 @@ export const wheelControllers = (function () {
     }
 
     function startSpecialSpining (turnsCount) {
-        
+
         let turn = 1;
         allSpinningCount++;
 
+        const section = render.specialSectorsListContainer(allSpinningCount);
+        const specialSectors = generateSpecialSectors(data);
+        const { firstSpecialSector, secondSpecialSector } = { ...specialSectors };
+        let availableSectorsData = data.filter(x => x != firstSpecialSector.sector && x != secondSpecialSector.sector);
+
         return new Promise((response, reject) => {
             
-            const section = render.specialSectorsListContainer(allSpinningCount);
-            const specialSectors = generateSpecialSectors(data);
-            const { firstSpecialSector, secondSpecialSector } = { ...specialSectors };
-
-            let availableSectorsData = data.filter(x => x != firstSpecialSector.sector && x != secondSpecialSector.sector);
-
             (async function repeatTurn() {
 
                 if(turn > turnsCount) {
@@ -58,7 +55,6 @@ export const wheelControllers = (function () {
                 const winningSector = getWinningSector(turn, randomGeneratedSector, firstSpecialSector, secondSpecialSector);
 
                 try {
-
                     startDegree = await spinningWheel(winningSector.degree, startDegree);
 
                     render.updateTableSectorsStatisticks(winningSector.sector);
@@ -70,6 +66,7 @@ export const wheelControllers = (function () {
                 catch (error) {
                     reject(error)
                 }
+
             })(); 
         })
     }
