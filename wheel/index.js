@@ -8,5 +8,4 @@ export const wheel = function () {
     render.renderWheel(data);
     render.tableSectorsStatisticks();
     wheelEvents();
-
 };

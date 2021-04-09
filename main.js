@@ -3,7 +3,6 @@ import { wheel } from './wheel/index.js';
 function main () {
     wheel();
 }
-
 main();
 
 // To run the project
